@@ -60,13 +60,6 @@ async function checkProvider(provider) {
     });
 
     const latency = Date.now() - start;
-    let data = null;
-
-    try {
-      data = await response.json();
-    } catch {
-      data = null;
-    }
 
     if (!response.ok) {
       return {
@@ -92,9 +85,32 @@ async function checkProvider(provider) {
   }
 }
 
+function displayResults(results) {
+  console.log('🔍 Vérification des connexions API...\n');
+
+  let okCount = 0;
+
+  for (const result of results) {
+    if (result.status === 'OK') {
+      console.log(`✅ ${result.provider.padEnd(12)} ${result.latency}ms`);
+      okCount++;
+    } else {
+      console.log(`❌ ${result.provider.padEnd(12)} ${result.latency}ms - ${result.error}`);
+    }
+  }
+
+  console.log(`\n${okCount}/${results.length} connexions actives`);
+
+  if (okCount === results.length) {
+    console.log('Tout est vert. Vous êtes prêts pour la suite !');
+  } else {
+    console.log('Certaines connexions sont à corriger.');
+  }
+}
+
 async function main() {
   const results = await Promise.all(providers.map(checkProvider));
-  console.log(results);
+  displayResults(results);
 }
 
 main();
