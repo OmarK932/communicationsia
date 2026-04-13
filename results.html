@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Résultats Mini-Projet IA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f8f9fb;
+      color: #222;
+    }
+    h1, h2 {
+      color: #111;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #f0f3f7;
+    }
+    tr.ok td {
+      background: #eafaf1;
+    }
+    tr.error td {
+      background: #fdecec;
+    }
+    tr.warn td {
+      background: #fff7e6;
+    }
+    .small {
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dashboard — Mini-Projet IA</h1>
+  <p class="small">Résumé visuel des phases réalisées du projet check-connections.</p>
+
+  <div class="card">
+    <h2>Connexions API</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Status</th>
+          <th>Latence (ms)</th>
+          <th>Erreur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ok"><td>Mistral</td><td>OK</td><td>481</td><td></td></tr>
+<tr class="ok"><td>Groq</td><td>OK</td><td>244</td><td></td></tr>
+<tr class="error"><td>HuggingFace</td><td>ERROR</td><td>281</td><td>HTTP 410</td></tr>
+<tr class="ok"><td>Pinecone</td><td>OK</td><td>649</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Comparaison multi-langue</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Langue</th>
+          <th>Tokens input</th>
+          <th>Tokens output</th>
+          <th>Coût estimé</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class=""><td>Français</td><td>29</td><td>70</td><td>0.00001980€</td></tr>
+<tr class=""><td>English</td><td>27</td><td>43</td><td>0.00001400€</td></tr>
+<tr class=""><td>Español</td><td>31</td><td>79</td><td>0.00002200€</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Comparaison hébergeurs</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Status</th>
+          <th>Latence (ms)</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ok"><td>Groq</td><td>OK</td><td>469</td><td>Réponse correcte</td></tr>
+<tr class="error"><td>HuggingFace</td><td>ERROR</td><td>0</td><td>HTTP 410</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
