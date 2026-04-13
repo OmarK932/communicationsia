@@ -85,6 +85,53 @@ async function checkProvider(provider) {
   }
 }
 
+async function checkPinecone() {
+  const start = Date.now();
+
+  try {
+    if (!process.env.PINECONE_API_KEY) {
+      return {
+        provider: 'Pinecone',
+        status: 'ERROR',
+        latency: 0,
+        error: 'Clé API manquante'
+      };
+    }
+
+    const response = await fetch('https://api.pinecone.io/indexes', {
+      method: 'GET',
+      headers: {
+        'Api-Key': process.env.PINECONE_API_KEY,
+        'X-Pinecone-API-Version': '2024-07'
+      }
+    });
+
+    const latency = Date.now() - start;
+
+    if (!response.ok) {
+      return {
+        provider: 'Pinecone',
+        status: 'ERROR',
+        latency,
+        error: `HTTP ${response.status}`
+      };
+    }
+
+    return {
+      provider: 'Pinecone',
+      status: 'OK',
+      latency
+    };
+  } catch (error) {
+    return {
+      provider: 'Pinecone',
+      status: 'ERROR',
+      latency: Date.now() - start,
+      error: error.message
+    };
+  }
+}
+
 function displayResults(results) {
   console.log('🔍 Vérification des connexions API...\n');
 
@@ -109,8 +156,9 @@ function displayResults(results) {
 }
 
 async function main() {
-  const results = await Promise.all(providers.map(checkProvider));
-  displayResults(results);
+  const providerResults = await Promise.all(providers.map(checkProvider));
+  const pineconeResult = await checkPinecone();
+  displayResults([...providerResults, pineconeResult]);
 }
 
 main();
